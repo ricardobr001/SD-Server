@@ -23,6 +23,9 @@ from werkzeug.utils import secure_filename
 
 DIRETORIO = 'files'
 
+if not os.path.exists(DIRETORIO):
+    os.makedirs(DIRETORIO)
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = DIRETORIO
 
