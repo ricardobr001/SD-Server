@@ -23,14 +23,13 @@ from werkzeug.utils import secure_filename
 
 DIRETORIO = 'files'
 
-if not os.path.exists(DIRETORIO):
-    os.makedirs(DIRETORIO)
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = DIRETORIO
 
 @app.route('/ListaArquivos')
 def listaArquivos():
+    if not os.path.exists(DIRETORIO):
+        os.makedirs(DIRETORIO)
     return str('/'.join(os.listdir(DIRETORIO)))
 
 @app.route('/download/<path:nome>', methods=['GET', 'POST'])    # Do server para o cliente
